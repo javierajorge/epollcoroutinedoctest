@@ -23,11 +23,14 @@
 namespace cppcoro
 {
 	template <typename T>
+	class disposable_task;
+	
+	template <typename T>
 	class task;
 
 	namespace detail
 	{
-		static int counter=0;
+		static int counter = 0;
 		class task_promise_base
 		{
 			friend struct final_awaitable;
@@ -69,6 +72,7 @@ namespace cppcoro
 					{
 						promise.m_continuation.resume();
 					}
+					//TODO: move this to the other type
 					else
 					{
 						coroutine.destroy();
@@ -81,6 +85,38 @@ namespace cppcoro
 				}
 			};
 
+			friend struct final_awaitable_for_disposable_task;
+			struct final_awaitable_for_disposable_task : final_awaitable
+			{
+				// HACK: Need to add CPPCORO_NOINLINE to await_suspend() method
+				// to avoid MSVC 2017.8 from spilling some local variables in
+				// await_suspend() onto the coroutine frame in some cases.
+				// Without this, some tests in async_auto_reset_event_tests.cpp
+				// were crashing under x86 optimised builds.
+				template <typename PROMISE>
+				CPPCORO_NOINLINE void await_suspend(std::coroutine_handle<PROMISE> coroutine) noexcept
+				{
+					std::cout << __PRETTY_FUNCTION__ << std::endl;
+
+					task_promise_base &promise = coroutine.promise();
+
+					// Use 'release' memory semantics in case we finish before the
+					// awaiter can suspend so that the awaiting thread sees our
+					// writes to the resulting value.
+					// Use 'acquire' memory semantics in case the caller registered
+					// the continuation before we finished. Ensure we see their write
+					// to m_continuation.
+					if (promise.m_state.exchange(true, std::memory_order_acq_rel))
+					{
+						promise.m_continuation.resume();
+					}
+					else
+					{
+						coroutine.destroy();
+					}
+				}
+			};
+
 		public:
 			int number;
 			task_promise_base() noexcept
@@ -88,7 +124,7 @@ namespace cppcoro
 				: m_state(false)
 #endif
 			{
-				number=++counter;
+				number = ++counter;
 				std::cout << __PRETTY_FUNCTION__ << "#" << number << std::endl;
 			}
 
@@ -97,10 +133,9 @@ namespace cppcoro
 				std::cout << __PRETTY_FUNCTION__ << "#" << number << std::endl;
 			}
 
-
 			auto initial_suspend() noexcept
 			{
-				std::cout << __PRETTY_FUNCTION__  << "#" << number << std::endl;
+				std::cout << __PRETTY_FUNCTION__ << "#" << number << std::endl;
 
 				return std::suspend_always{};
 			}
@@ -139,11 +174,11 @@ namespace cppcoro
 		template <typename T>
 		class task_promise final : public task_promise_base
 		{
-			
+
 		public:
 			task_promise() noexcept
 			{
-				
+
 				std::cout << __PRETTY_FUNCTION__ << std::endl;
 			}
 
@@ -164,7 +199,7 @@ namespace cppcoro
 				}
 			}
 
-			task<T> get_return_object() noexcept;
+			disposable_task<T> get_return_object() noexcept;
 
 			void unhandled_exception() noexcept
 			{
@@ -240,7 +275,7 @@ namespace cppcoro
 		public:
 			task_promise() noexcept = default;
 
-			task<void> get_return_object() noexcept;
+			disposable_task<void> get_return_object() noexcept;
 
 			void return_void() noexcept
 			{
@@ -269,7 +304,7 @@ namespace cppcoro
 		public:
 			task_promise() noexcept = default;
 
-			task<T &> get_return_object() noexcept;
+			disposable_task<T &> get_return_object() noexcept;
 
 			void unhandled_exception() noexcept
 			{
@@ -306,7 +341,7 @@ namespace cppcoro
 	/// caller. Execution of the coroutine body does not start until the
 	/// coroutine is first co_await'ed.
 	template <typename T = void>
-	class [[nodiscard]] task
+	class disposable_task
 	{
 	public:
 		using promise_type = detail::task_promise<T>;
@@ -361,29 +396,29 @@ namespace cppcoro
 		};
 
 	public:
-		task() noexcept
+		disposable_task() noexcept
 			: m_coroutine(nullptr)
 		{
 			std::cout << __PRETTY_FUNCTION__ << std::endl;
 		}
 
-		explicit task(std::coroutine_handle<promise_type> coroutine)
+		explicit disposable_task(std::coroutine_handle<promise_type> coroutine)
 			: m_coroutine(coroutine)
 		{
 		}
 
-		task(task &&t) noexcept
+		disposable_task(disposable_task &&t) noexcept
 			: m_coroutine(t.m_coroutine)
 		{
 			t.m_coroutine = nullptr;
 		}
 
 		/// Disable copy construction/assignment.
-		task(const task &) = delete;
-		task &operator=(const task &) = delete;
+		disposable_task(const disposable_task &) = delete;
+		disposable_task &operator=(const disposable_task &) = delete;
 
 		/// Frees resources used by this task.
-		~task()
+		virtual ~disposable_task()
 		{
 			std::cout << __PRETTY_FUNCTION__ << std::endl;
 			if (m_coroutine)
@@ -407,7 +442,7 @@ namespace cppcoro
 			m_coroutine.resume();
 		}
 
-		task &operator=(task &&other) noexcept
+		disposable_task &operator=(disposable_task &&other) noexcept
 		{
 			if (std::addressof(other) != this)
 			{
@@ -429,7 +464,7 @@ namespace cppcoro
 		/// Awaiting a task that is ready is guaranteed not to block/suspend.
 		bool is_ready() const noexcept
 		{
-			std::cout << __PRETTY_FUNCTION__ << "#" << m_coroutine.promise.number << std::endl;
+			std::cout << __PRETTY_FUNCTION__ << "#" << m_coroutine.promise().number << std::endl;
 			return !m_coroutine || m_coroutine.done();
 		}
 
@@ -465,7 +500,6 @@ namespace cppcoro
 					{
 						throw broken_promise{};
 					}
-					std::cout << __PRETTY_FUNCTION__  << std::endl;
 					return std::move(this->m_coroutine.promise()).result();
 				}
 			};
@@ -476,46 +510,88 @@ namespace cppcoro
 		/// \brief
 		/// Returns an awaitable that will await completion of the task without
 		/// attempting to retrieve the result.
+		/// todo: https://github.com/lewissbaker/cppcoro/blob/a87e97fe5b6091ca9f6de4637736b8e0d8b109cf/test/io_service_tests.cpp#L178
 		auto when_ready() const noexcept
 		{
 			struct awaitable : awaitable_base
 			{
 				using awaitable_base::awaitable_base;
 
-				void await_resume() const noexcept {			std::cout << __PRETTY_FUNCTION__ << "#" << m_coroutine.promise.number << std::endl;
-}
+				void await_resume() const noexcept
+				{
+					std::cout << __PRETTY_FUNCTION__ << "#" << m_coroutine.promise.number << std::endl;
+				}
 			};
 
 			return awaitable{m_coroutine};
 		}
 
-	private:
+	protected:
 		std::coroutine_handle<promise_type> m_coroutine;
+	};
+
+
+
+
+	
+
+	template <typename T = void>
+	class [[nodiscard]] task : public disposable_task<T>
+	{
+		using disposable_task<T>::disposable_task;
+	public:
+	/*	using promise_type = detail::task_promise<T>;
+
+		using value_type = T;
+
+		task() noexcept: disposable_task<T>() 
+		{
+			std::cout << __PRETTY_FUNCTION__ << std::endl;
+		}
+
+		explicit task(std::coroutine_handle<promise_type> coroutine) noexcept : disposable_task<T>(coroutine)
+		{
+		}
+
+		task(task &&t) noexcept : disposable_task<T>(t)
+		{
+		}*/
+
+		~task()
+		{
+			std::cout << __PRETTY_FUNCTION__ << std::endl;
+			if (this->m_coroutine)
+			{
+				std::cout << "have you finished ? " << this->m_coroutine.done() << std::endl;
+				this->m_coroutine.destroy();
+				std::cout << "anyway, i've just destroyed m_coroutine, i'm not disposable" << std::endl;
+			}
+		}
 	};
 
 	namespace detail
 	{
 		template <typename T>
-		task<T> task_promise<T>::get_return_object() noexcept
+		disposable_task<T> task_promise<T>::get_return_object() noexcept
 		{
-			return task<T>{std::coroutine_handle<task_promise>::from_promise(*this)};
+			return disposable_task<T>{std::coroutine_handle<task_promise>::from_promise(*this)};
 		}
 
-		inline task<void> task_promise<void>::get_return_object() noexcept
+		inline disposable_task<void> task_promise<void>::get_return_object() noexcept
 		{
-			return task<void>{std::coroutine_handle<task_promise>::from_promise(*this)};
+			return disposable_task<void>{std::coroutine_handle<task_promise>::from_promise(*this)};
 		}
 
 		template <typename T>
-		task<T &> task_promise<T &>::get_return_object() noexcept
+		disposable_task<T &> task_promise<T &>::get_return_object() noexcept
 		{
-			return task<T &>{std::coroutine_handle<task_promise>::from_promise(*this)};
+			return disposable_task<T &>{std::coroutine_handle<task_promise>::from_promise(*this)};
 		}
 	}
 
 	template <typename AWAITABLE>
 	auto make_task(AWAITABLE awaitable)
-		-> task<detail::remove_rvalue_reference_t<typename awaitable_traits<AWAITABLE>::await_result_t>>
+		-> disposable_task<detail::remove_rvalue_reference_t<typename awaitable_traits<AWAITABLE>::await_result_t>>
 	{
 		co_return co_await static_cast<AWAITABLE &&>(awaitable);
 	}
