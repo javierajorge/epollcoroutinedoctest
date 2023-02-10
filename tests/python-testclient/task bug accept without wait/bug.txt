@@ -1,0 +1,675 @@
+ataching ...
+cppcoro::detail::task_promise_base::task_promise_base()#1
+auto cppcoro::detail::task_promise_base::initial_suspend()#1
+void cppcoro::task<T>::resume() [with T = void]#1
+begin accept
+cppcoro::detail::task_promise_base::task_promise_base()#2
+cppcoro::detail::task_promise<T>::task_promise() [with T = std::unique_ptr<Socket>]
+auto cppcoro::detail::task_promise_base::initial_suspend()#2
+BlockSyscall<SyscallOpt, ReturnValue>::BlockSyscall() [with SyscallOpt = SocketAcceptOperation; ReturnValue = int] 
+SocketAcceptOperation::SocketAcceptOperation(Socket*) 
+socket_accept_operation
+SocketAcceptOperation::SocketAcceptOperation(Socket*) 
+bool BlockSyscall<SyscallOpt, ReturnValue>::await_ready() const [with SyscallOpt = SocketAcceptOperation; ReturnValue = int] 
+bool BlockSyscall<SyscallOpt, ReturnValue>::await_suspend(std::__n4861::coroutine_handle<void>) [with SyscallOpt = SocketAcceptOperation; ReturnValue = int] 
+int SocketAcceptOperation::syscall() 
+accept(4, ...)
+...suspendiendo ... por un -1
+void SocketAcceptOperation::suspend() 
+esperando en el epoll
+llamando en in
+ReturnValue BlockSyscall<SyscallOpt, ReturnValue>::await_resume() [with SyscallOpt = SocketAcceptOperation; ReturnValue = int] 
+await_resume
+int SocketAcceptOperation::syscall() 
+accept(4, ...)
+SocketAcceptOperation::~SocketAcceptOperation() 
+~socket_accept_operation
+SocketAcceptOperation::~SocketAcceptOperation() 
+aceptandoAsyncFileDescriptor 5Created
+ataching ...
+auto cppcoro::detail::task_promise_base::final_suspend()#2
+bool cppcoro::detail::task_promise_base::final_awaitable::await_ready() const
+void cppcoro::detail::task_promise_base::final_awaitable::await_suspend(std::__n4861::coroutine_handle<PROMISE>) [with PROMISE = cppcoro::detail::task_promise<std::unique_ptr<Socket> >]
+decltype(auto) cppcoro::task<T>::operator co_await() const &&::awaitable::await_resume() [with T = std::unique_ptr<Socket>]
+cppcoro::task<T>::~task() [with T = std::unique_ptr<Socket>]
+have you finished ? 1task disposable = 0
+cppcoro::detail::task_promise<T>::~task_promise() [with T = std::unique_ptr<Socket>]
+cppcoro::detail::task_promise_base::~task_promise_base()#2
+acabo de destruir la m_coro
+cppcoro::detail::task_promise_base::task_promise_base()#3
+cppcoro::detail::task_promise<T>::task_promise() [with T = bool]
+auto cppcoro::detail::task_promise_base::initial_suspend()#3
+void cppcoro::task<T>::resume() [with T = bool]#3
+BEGIN
+cppcoro::detail::task_promise_base::task_promise_base()#4
+cppcoro::detail::task_promise<T>::task_promise() [with T = bool]
+auto cppcoro::detail::task_promise_base::initial_suspend()#4
+BlockSyscall<SyscallOpt, ReturnValue>::BlockSyscall() [with SyscallOpt = SocketRecvOperation; ReturnValue = long int] 
+SocketRecvOperation::SocketRecvOperation(Socket*, void*, std::size_t) 
+socket_recv_operation
+bool BlockSyscall<SyscallOpt, ReturnValue>::await_ready() const [with SyscallOpt = SocketRecvOperation; ReturnValue = long int] 
+bool BlockSyscall<SyscallOpt, ReturnValue>::await_suspend(std::__n4861::coroutine_handle<void>) [with SyscallOpt = SocketRecvOperation; ReturnValue = long int] 
+recv(5contentammount255)
+recv 68
+ReturnValue BlockSyscall<SyscallOpt, ReturnValue>::await_resume() [with SyscallOpt = SocketRecvOperation; ReturnValue = long int] 
+await_resume
+SocketRecvOperation::~SocketRecvOperation() 
+~socket_recv_operation
+RECIVING ({123456789012312345678901231234567890123><2345678901231234567890123}):
+PipedAsyncCommand construction cat
+AsyncFileDescriptor 8Created
+ataching RO ...8
+successfully attached for reading # 8
+AsyncFileDescriptor 7Created
+ataching WO ...7
+2049 flags
+successfully attached for writing events# 7
+forked process ---- 327630........................... 
+PipedAsyncCommand creation finished 
+BlockSyscall<SyscallOpt, ReturnValue>::BlockSyscall() [with SyscallOpt = FileWriteOperation; ReturnValue = long int] 
+FileWriteOperation::FileWriteOperation(std::shared_ptr<AsyncFileDescriptor>, void*, std::size_t) 
+FileWriteOperation created
+bool BlockSyscall<SyscallOpt, ReturnValue>::await_ready() const [with SyscallOpt = FileWriteOperation; ReturnValue = long int] 
+bool BlockSyscall<SyscallOpt, ReturnValue>::await_suspend(std::__n4861::coroutine_handle<void>) [with SyscallOpt = FileWriteOperation; ReturnValue = long int] 
+ssize_t FileWriteOperation::syscall() 
+FileWriteOperation write(7,{123456789012312345678901231234567890123><2345678901231234567890123},68)
+bytes read68
+ReturnValue BlockSyscall<SyscallOpt, ReturnValue>::await_resume() [with SyscallOpt = FileWriteOperation; ReturnValue = long int] 
+await_resume
+FileWriteOperation::~FileWriteOperation() 
+forked process ---- 0........................... 
+~FileWriteOperation
+writepipe ({123456789012312345678901231234567890123><2345678901231234567890123}):
+BlockSyscall<SyscallOpt, ReturnValue>::BlockSyscall() [with SyscallOpt = FileReadOperation; ReturnValue = long int] 
+FileReadOperation::FileReadOperation(std::shared_ptr<AsyncFileDescriptor>, void*, std::size_t) 
+FileReadOperation created
+bool BlockSyscall<SyscallOpt, ReturnValue>::await_ready() const [with SyscallOpt = FileReadOperation; ReturnValue = long int] 
+bool BlockSyscall<SyscallOpt, ReturnValue>::await_suspend(std::__n4861::coroutine_handle<void>) [with SyscallOpt = FileReadOperation; ReturnValue = long int] 
+ssize_t FileReadOperation::syscall() 
+FileReadOperation reading(8256
+**** error ****Resource temporarily unavailable
+Read -1 bytes
+...suspendiendo ... por un -1
+void FileReadOperation::suspend() 
+end accept
+cppcoro::task<T>::~task() [with T = bool]
+have you finished ? 0task disposable = 1
+no destruir la m_coro
+begin accept
+cppcoro::detail::task_promise_base::task_promise_base()#5
+cppcoro::detail::task_promise<T>::task_promise() [with T = std::unique_ptr<Socket>]
+auto cppcoro::detail::task_promise_base::initial_suspend()#5
+BlockSyscall<SyscallOpt, ReturnValue>::BlockSyscall() [with SyscallOpt = SocketAcceptOperation; ReturnValue = int] 
+SocketAcceptOperation::SocketAcceptOperation(Socket*) 
+socket_accept_operation
+SocketAcceptOperation::SocketAcceptOperation(Socket*) 
+bool BlockSyscall<SyscallOpt, ReturnValue>::await_ready() const [with SyscallOpt = SocketAcceptOperation; ReturnValue = int] 
+bool BlockSyscall<SyscallOpt, ReturnValue>::await_suspend(std::__n4861::coroutine_handle<void>) [with SyscallOpt = SocketAcceptOperation; ReturnValue = int] 
+int SocketAcceptOperation::syscall() 
+accept(4, ...)
+...suspendiendo ... por un -1
+void SocketAcceptOperation::suspend() 
+esperando en el epoll
+llamando en in
+ReturnValue BlockSyscall<SyscallOpt, ReturnValue>::await_resume() [with SyscallOpt = FileReadOperation; ReturnValue = long int] 
+await_resume
+ssize_t FileReadOperation::syscall() 
+FileReadOperation reading(8256
+Read 68 bytes
+FileReadOperation::~FileReadOperation() 
+~FileReadOperation
+readpipe ({123456789012312345678901231234567890123><2345678901231234567890123}):
+------delete the AsyncFileDescriptor(8)
+------delete the AsyncFileDescriptor(7)
+wait returned                              : 0 but waiting for 327630
+kill returned 0 wait returned                              : 0 but waiting for 327630
+wait returned                              : 0 but waiting for 327630
+wait returned                              : 0 but waiting for 327630
+wait returned                              : 0 but waiting for 327630
+wait returned                              : 0 but waiting for 327630
+wait returned                              : 0 but waiting for 327630
+wait returned                              : 0 but waiting for 327630
+wait returned                              : 0 but waiting for 327630
+wait returned                              : 0 but waiting for 327630
+wait returned                              : 0 but waiting for 327630
+wait returned                              : 0 but waiting for 327630
+wait returned                              : 0 but waiting for 327630
+wait returned                              : 0 but waiting for 327630
+wait returned                              : 0 but waiting for 327630
+wait returned                              : 0 but waiting for 327630
+wait returned                              : 0 but waiting for 327630
+wait returned                              : 0 but waiting for 327630
+wait returned                              : 0 but waiting for 327630
+wait returned                              : 0 but waiting for 327630
+wait returned                              : 0 but waiting for 327630
+wait returned                              : 0 but waiting for 327630
+wait returned                              : 0 but waiting for 327630
+wait returned                              : 0 but waiting for 327630
+wait returned                              : 0 but waiting for 327630
+wait returned                              : 0 but waiting for 327630
+wait returned                              : 0 but waiting for 327630
+wait returned                              : 0 but waiting for 327630
+wait returned                              : 0 but waiting for 327630
+wait returned                              : 0 but waiting for 327630
+wait returned                              : 0 but waiting for 327630
+wait returned                              : 0 but waiting for 327630
+wait returned                              : 0 but waiting for 327630
+wait returned                              : 0 but waiting for 327630
+wait returned                              : 0 but waiting for 327630
+wait returned                              : 0 but waiting for 327630
+wait returned                              : 327630 but waiting for 327630
+SENDING ({123456789012312345678901231234567890123><2345678901231234567890123}):
+BlockSyscall<SyscallOpt, ReturnValue>::BlockSyscall() [with SyscallOpt = SocketSendOperation; ReturnValue = long int] 
+SocketSendOperation::SocketSendOperation(Socket*, void*, std::size_t) 
+socket_send_operation
+bool BlockSyscall<SyscallOpt, ReturnValue>::await_ready() const [with SyscallOpt = SocketSendOperation; ReturnValue = long int] 
+bool BlockSyscall<SyscallOpt, ReturnValue>::await_suspend(std::__n4861::coroutine_handle<void>) [with SyscallOpt = SocketSendOperation; ReturnValue = long int] 
+ssize_t SocketSendOperation::syscall() 
+send(5content{123456789012312345678901231234567890123><2345678901231234567890123}ammount68)
+ReturnValue BlockSyscall<SyscallOpt, ReturnValue>::await_resume() [with SyscallOpt = SocketSendOperation; ReturnValue = long int] 
+await_resume
+SocketSendOperation::~SocketSendOperation() 
+~socket_send_operation
+DONE (68):
+auto cppcoro::detail::task_promise_base::final_suspend()#4
+bool cppcoro::detail::task_promise_base::final_awaitable::await_ready() const
+void cppcoro::detail::task_promise_base::final_awaitable::await_suspend(std::__n4861::coroutine_handle<PROMISE>) [with PROMISE = cppcoro::detail::task_promise<bool>]
+decltype(auto) cppcoro::task<T>::operator co_await() const &&::awaitable::await_resume() [with T = bool]
+cppcoro::task<T>::~task() [with T = bool]
+have you finished ? 1task disposable = 0
+cppcoro::detail::task_promise<T>::~task_promise() [with T = bool]
+cppcoro::detail::task_promise_base::~task_promise_base()#4
+acabo de destruir la m_coro
+END
+------delete the socket(5)
+------delete the AsyncFileDescriptor(-1)
+auto cppcoro::detail::task_promise_base::final_suspend()#3
+bool cppcoro::detail::task_promise_base::final_awaitable::await_ready() const
+void cppcoro::detail::task_promise_base::final_awaitable::await_suspend(std::__n4861::coroutine_handle<PROMISE>) [with PROMISE = cppcoro::detail::task_promise<bool>]
+cppcoro::detail::task_promise<T>::~task_promise() [with T = bool]
+cppcoro::detail::task_promise_base::~task_promise_base()#3
+esperando en el epoll
+llamando en in
+ReturnValue BlockSyscall<SyscallOpt, ReturnValue>::await_resume() [with SyscallOpt = SocketAcceptOperation; ReturnValue = int] 
+await_resume
+int SocketAcceptOperation::syscall() 
+accept(4, ...)
+SocketAcceptOperation::~SocketAcceptOperation() 
+~socket_accept_operation
+SocketAcceptOperation::~SocketAcceptOperation() 
+aceptandoAsyncFileDescriptor 5Created
+ataching ...
+auto cppcoro::detail::task_promise_base::final_suspend()#5
+bool cppcoro::detail::task_promise_base::final_awaitable::await_ready() const
+void cppcoro::detail::task_promise_base::final_awaitable::await_suspend(std::__n4861::coroutine_handle<PROMISE>) [with PROMISE = cppcoro::detail::task_promise<std::unique_ptr<Socket> >]
+decltype(auto) cppcoro::task<T>::operator co_await() const &&::awaitable::await_resume() [with T = std::unique_ptr<Socket>]
+cppcoro::task<T>::~task() [with T = std::unique_ptr<Socket>]
+have you finished ? 1task disposable = 0
+cppcoro::detail::task_promise<T>::~task_promise() [with T = std::unique_ptr<Socket>]
+cppcoro::detail::task_promise_base::~task_promise_base()#5
+acabo de destruir la m_coro
+cppcoro::detail::task_promise_base::task_promise_base()#6
+cppcoro::detail::task_promise<T>::task_promise() [with T = bool]
+auto cppcoro::detail::task_promise_base::initial_suspend()#6
+void cppcoro::task<T>::resume() [with T = bool]#6
+BEGIN
+cppcoro::detail::task_promise_base::task_promise_base()#7
+cppcoro::detail::task_promise<T>::task_promise() [with T = bool]
+auto cppcoro::detail::task_promise_base::initial_suspend()#7
+BlockSyscall<SyscallOpt, ReturnValue>::BlockSyscall() [with SyscallOpt = SocketRecvOperation; ReturnValue = long int] 
+SocketRecvOperation::SocketRecvOperation(Socket*, void*, std::size_t) 
+socket_recv_operation
+bool BlockSyscall<SyscallOpt, ReturnValue>::await_ready() const [with SyscallOpt = SocketRecvOperation; ReturnValue = long int] 
+bool BlockSyscall<SyscallOpt, ReturnValue>::await_suspend(std::__n4861::coroutine_handle<void>) [with SyscallOpt = SocketRecvOperation; ReturnValue = long int] 
+recv(5contentammount255)
+recv 68
+ReturnValue BlockSyscall<SyscallOpt, ReturnValue>::await_resume() [with SyscallOpt = SocketRecvOperation; ReturnValue = long int] 
+await_resume
+SocketRecvOperation::~SocketRecvOperation() 
+~socket_recv_operation
+RECIVING ({123456789012312345678901231234567890123><2345678901231234567890123}):
+PipedAsyncCommand construction cat
+AsyncFileDescriptor 8Created
+ataching RO ...8
+successfully attached for reading # 8
+AsyncFileDescriptor 7Created
+ataching WO ...7
+2049 flags
+successfully attached for writing events# 7
+forked process ---- 327658........................... 
+PipedAsyncCommand creation finished 
+BlockSyscall<SyscallOpt, ReturnValue>::BlockSyscall() [with SyscallOpt = FileWriteOperation; ReturnValue = long int] 
+FileWriteOperation::FileWriteOperation(std::shared_ptr<AsyncFileDescriptor>, void*, std::size_t) 
+FileWriteOperation created
+bool BlockSyscall<SyscallOpt, ReturnValue>::await_ready() const [with SyscallOpt = FileWriteOperation; ReturnValue = long int] 
+bool BlockSyscall<SyscallOpt, ReturnValue>::await_suspend(std::__n4861::coroutine_handle<void>) [with SyscallOpt = FileWriteOperation; ReturnValue = long int] 
+ssize_t FileWriteOperation::syscall() 
+FileWriteOperation write(7,{123456789012312345678901231234567890123><2345678901231234567890123},68)
+bytes read68
+ReturnValue BlockSyscall<SyscallOpt, ReturnValue>::await_resume() [with SyscallOpt = FileWriteOperation; ReturnValue = long int] 
+await_resume
+FileWriteOperation::~FileWriteOperation() 
+~FileWriteOperation
+writepipe ({123456789012312345678901231234567890123><2345678901231234567890123}):
+BlockSyscall<SyscallOpt, ReturnValue>::BlockSyscall() [with SyscallOpt = FileReadOperation; ReturnValue = long int] 
+FileReadOperation::FileReadOperation(std::shared_ptr<AsyncFileDescriptor>, void*, std::size_t) 
+FileReadOperation created
+bool BlockSyscall<SyscallOpt, ReturnValue>::await_ready() const [with SyscallOpt = FileReadOperation; ReturnValue = long int] 
+bool BlockSyscall<SyscallOpt, ReturnValue>::await_suspend(std::__n4861::coroutine_handle<void>) [with SyscallOpt = FileReadOperation; ReturnValue = long int] 
+ssize_t FileReadOperation::syscall() 
+FileReadOperation reading(8{123456789012312345678901231234567890123><2345678901231234567890123}256
+**** error ****Resource temporarily unavailable
+Read -1 bytes
+forked process ---- 0........................... 
+...suspendiendo ... por un -1
+void FileReadOperation::suspend() 
+end accept
+cppcoro::task<T>::~task() [with T = bool]
+have you finished ? 0task disposable = 1
+no destruir la m_coro
+begin accept
+cppcoro::detail::task_promise_base::task_promise_base()#8
+cppcoro::detail::task_promise<T>::task_promise() [with T = std::unique_ptr<Socket>]
+auto cppcoro::detail::task_promise_base::initial_suspend()#8
+BlockSyscall<SyscallOpt, ReturnValue>::BlockSyscall() [with SyscallOpt = SocketAcceptOperation; ReturnValue = int] 
+SocketAcceptOperation::SocketAcceptOperation(Socket*) 
+socket_accept_operation
+SocketAcceptOperation::SocketAcceptOperation(Socket*) 
+bool BlockSyscall<SyscallOpt, ReturnValue>::await_ready() const [with SyscallOpt = SocketAcceptOperation; ReturnValue = int] 
+bool BlockSyscall<SyscallOpt, ReturnValue>::await_suspend(std::__n4861::coroutine_handle<void>) [with SyscallOpt = SocketAcceptOperation; ReturnValue = int] 
+int SocketAcceptOperation::syscall() 
+accept(4, ...)
+...suspendiendo ... por un -1
+void SocketAcceptOperation::suspend() 
+esperando en el epoll
+llamando en in
+ReturnValue BlockSyscall<SyscallOpt, ReturnValue>::await_resume() [with SyscallOpt = FileReadOperation; ReturnValue = long int] 
+await_resume
+ssize_t FileReadOperation::syscall() 
+FileReadOperation reading(8{123456789012312345678901231234567890123><2345678901231234567890123}256
+Read 68 bytes
+FileReadOperation::~FileReadOperation() 
+~FileReadOperation
+readpipe ({123456789012312345678901231234567890123><2345678901231234567890123}):
+------delete the AsyncFileDescriptor(8)
+------delete the AsyncFileDescriptor(7)
+wait returned                              : 0 but waiting for 327658
+kill returned 0 wait returned                              : 0 but waiting for 327658
+wait returned                              : 0 but waiting for 327658
+wait returned                              : 0 but waiting for 327658
+wait returned                              : 0 but waiting for 327658
+wait returned                              : 0 but waiting for 327658
+wait returned                              : 0 but waiting for 327658
+wait returned                              : 0 but waiting for 327658
+wait returned                              : 0 but waiting for 327658
+wait returned                              : 0 but waiting for 327658
+wait returned                              : 0 but waiting for 327658
+wait returned                              : 0 but waiting for 327658
+wait returned                              : 0 but waiting for 327658
+wait returned                              : 0 but waiting for 327658
+wait returned                              : 0 but waiting for 327658
+wait returned                              : 0 but waiting for 327658
+wait returned                              : 0 but waiting for 327658
+wait returned                              : 0 but waiting for 327658
+wait returned                              : 0 but waiting for 327658
+wait returned                              : 0 but waiting for 327658
+wait returned                              : 0 but waiting for 327658
+wait returned                              : 0 but waiting for 327658
+wait returned                              : 0 but waiting for 327658
+wait returned                              : 0 but waiting for 327658
+wait returned                              : 0 but waiting for 327658
+wait returned                              : 0 but waiting for 327658
+wait returned                              : 0 but waiting for 327658
+wait returned                              : 0 but waiting for 327658
+wait returned                              : 0 but waiting for 327658
+wait returned                              : 0 but waiting for 327658
+wait returned                              : 0 but waiting for 327658
+wait returned                              : 0 but waiting for 327658
+wait returned                              : 0 but waiting for 327658
+wait returned                              : 0 but waiting for 327658
+wait returned                              : 0 but waiting for 327658
+wait returned                              : 0 but waiting for 327658
+wait returned                              : 0 but waiting for 327658
+wait returned                              : 0 but waiting for 327658
+wait returned                              : 0 but waiting for 327658
+wait returned                              : 0 but waiting for 327658
+wait returned                              : 0 but waiting for 327658
+wait returned                              : 0 but waiting for 327658
+wait returned                              : 0 but waiting for 327658
+wait returned                              : 0 but waiting for 327658
+wait returned                              : 0 but waiting for 327658
+wait returned                              : 0 but waiting for 327658
+wait returned                              : 0 but waiting for 327658
+wait returned                              : 0 but waiting for 327658
+wait returned                              : 0 but waiting for 327658
+wait returned                              : 0 but waiting for 327658
+wait returned                              : 0 but waiting for 327658
+wait returned                              : 0 but waiting for 327658
+wait returned                              : 0 but waiting for 327658
+wait returned                              : 0 but waiting for 327658
+wait returned                              : 0 but waiting for 327658
+wait returned                              : 0 but waiting for 327658
+wait returned                              : 0 but waiting for 327658
+wait returned                              : 0 but waiting for 327658
+wait returned                              : 0 but waiting for 327658
+wait returned                              : 0 but waiting for 327658
+wait returned                              : 0 but waiting for 327658
+wait returned                              : 0 but waiting for 327658
+wait returned                              : 0 but waiting for 327658
+wait returned                              : 0 but waiting for 327658
+wait returned                              : 0 but waiting for 327658
+wait returned                              : 0 but waiting for 327658
+wait returned                              : 0 but waiting for 327658
+wait returned                              : 0 but waiting for 327658
+wait returned                              : 0 but waiting for 327658
+wait returned                              : 0 but waiting for 327658
+wait returned                              : 0 but waiting for 327658
+wait returned                              : 0 but waiting for 327658
+wait returned                              : 0 but waiting for 327658
+wait returned                              : 0 but waiting for 327658
+wait returned                              : 0 but waiting for 327658
+wait returned                              : 327658 but waiting for 327658
+SENDING ({123456789012312345678901231234567890123><2345678901231234567890123}):
+BlockSyscall<SyscallOpt, ReturnValue>::BlockSyscall() [with SyscallOpt = SocketSendOperation; ReturnValue = long int] 
+SocketSendOperation::SocketSendOperation(Socket*, void*, std::size_t) 
+socket_send_operation
+bool BlockSyscall<SyscallOpt, ReturnValue>::await_ready() const [with SyscallOpt = SocketSendOperation; ReturnValue = long int] 
+bool BlockSyscall<SyscallOpt, ReturnValue>::await_suspend(std::__n4861::coroutine_handle<void>) [with SyscallOpt = SocketSendOperation; ReturnValue = long int] 
+ssize_t SocketSendOperation::syscall() 
+send(5content{123456789012312345678901231234567890123><2345678901231234567890123}ammount68)
+ReturnValue BlockSyscall<SyscallOpt, ReturnValue>::await_resume() [with SyscallOpt = SocketSendOperation; ReturnValue = long int] 
+await_resume
+SocketSendOperation::~SocketSendOperation() 
+~socket_send_operation
+DONE (68):
+auto cppcoro::detail::task_promise_base::final_suspend()#7
+bool cppcoro::detail::task_promise_base::final_awaitable::await_ready() const
+void cppcoro::detail::task_promise_base::final_awaitable::await_suspend(std::__n4861::coroutine_handle<PROMISE>) [with PROMISE = cppcoro::detail::task_promise<bool>]
+decltype(auto) cppcoro::task<T>::operator co_await() const &&::awaitable::await_resume() [with T = bool]
+cppcoro::task<T>::~task() [with T = bool]
+have you finished ? 1task disposable = 0
+cppcoro::detail::task_promise<T>::~task_promise() [with T = bool]
+cppcoro::detail::task_promise_base::~task_promise_base()#7
+acabo de destruir la m_coro
+END
+------delete the socket(5)
+------delete the AsyncFileDescriptor(-1)
+auto cppcoro::detail::task_promise_base::final_suspend()#6
+bool cppcoro::detail::task_promise_base::final_awaitable::await_ready() const
+void cppcoro::detail::task_promise_base::final_awaitable::await_suspend(std::__n4861::coroutine_handle<PROMISE>) [with PROMISE = cppcoro::detail::task_promise<bool>]
+cppcoro::detail::task_promise<T>::~task_promise() [with T = bool]
+cppcoro::detail::task_promise_base::~task_promise_base()#6
+esperando en el epoll
+llamando en in
+ReturnValue BlockSyscall<SyscallOpt, ReturnValue>::await_resume() [with SyscallOpt = SocketAcceptOperation; ReturnValue = int] 
+await_resume
+int SocketAcceptOperation::syscall() 
+accept(4, ...)
+SocketAcceptOperation::~SocketAcceptOperation() 
+~socket_accept_operation
+SocketAcceptOperation::~SocketAcceptOperation() 
+aceptandoAsyncFileDescriptor 5Created
+ataching ...
+auto cppcoro::detail::task_promise_base::final_suspend()#8
+bool cppcoro::detail::task_promise_base::final_awaitable::await_ready() const
+void cppcoro::detail::task_promise_base::final_awaitable::await_suspend(std::__n4861::coroutine_handle<PROMISE>) [with PROMISE = cppcoro::detail::task_promise<std::unique_ptr<Socket> >]
+decltype(auto) cppcoro::task<T>::operator co_await() const &&::awaitable::await_resume() [with T = std::unique_ptr<Socket>]
+cppcoro::task<T>::~task() [with T = std::unique_ptr<Socket>]
+have you finished ? 1task disposable = 0
+cppcoro::detail::task_promise<T>::~task_promise() [with T = std::unique_ptr<Socket>]
+cppcoro::detail::task_promise_base::~task_promise_base()#8
+acabo de destruir la m_coro
+cppcoro::detail::task_promise_base::task_promise_base()#9
+cppcoro::detail::task_promise<T>::task_promise() [with T = bool]
+auto cppcoro::detail::task_promise_base::initial_suspend()#9
+void cppcoro::task<T>::resume() [with T = bool]#9
+BEGIN
+cppcoro::detail::task_promise_base::task_promise_base()#10
+cppcoro::detail::task_promise<T>::task_promise() [with T = bool]
+auto cppcoro::detail::task_promise_base::initial_suspend()#10
+BlockSyscall<SyscallOpt, ReturnValue>::BlockSyscall() [with SyscallOpt = SocketRecvOperation; ReturnValue = long int] 
+SocketRecvOperation::SocketRecvOperation(Socket*, void*, std::size_t) 
+socket_recv_operation
+bool BlockSyscall<SyscallOpt, ReturnValue>::await_ready() const [with SyscallOpt = SocketRecvOperation; ReturnValue = long int] 
+bool BlockSyscall<SyscallOpt, ReturnValue>::await_suspend(std::__n4861::coroutine_handle<void>) [with SyscallOpt = SocketRecvOperation; ReturnValue = long int] 
+recv(5contentammount255)
+recv 68
+ReturnValue BlockSyscall<SyscallOpt, ReturnValue>::await_resume() [with SyscallOpt = SocketRecvOperation; ReturnValue = long int] 
+await_resume
+SocketRecvOperation::~SocketRecvOperation() 
+~socket_recv_operation
+RECIVING ({123456789012312345678901231234567890123><2345678901231234567890123}):
+PipedAsyncCommand construction cat
+AsyncFileDescriptor 8Created
+ataching RO ...8
+successfully attached for reading # 8
+AsyncFileDescriptor 7Created
+ataching WO ...7
+2049 flags
+successfully attached for writing events# 7
+forked process ---- 327664........................... 
+PipedAsyncCommand creation finished 
+BlockSyscall<SyscallOpt, ReturnValue>::BlockSyscall() [with SyscallOpt = FileWriteOperation; ReturnValue = long int] 
+FileWriteOperation::FileWriteOperation(std::shared_ptr<AsyncFileDescriptor>, void*, std::size_t) 
+FileWriteOperation created
+bool BlockSyscall<SyscallOpt, ReturnValue>::await_ready() const [with SyscallOpt = FileWriteOperation; ReturnValue = long int] 
+bool BlockSyscall<SyscallOpt, ReturnValue>::await_suspend(std::__n4861::coroutine_handle<void>) [with SyscallOpt = FileWriteOperation; ReturnValue = long int] 
+ssize_t FileWriteOperation::syscall() 
+FileWriteOperation write(7,{123456789012312345678901231234567890123><2345678901231234567890123},68)
+bytes read68
+ReturnValue BlockSyscall<SyscallOpt, ReturnValue>::await_resume() [with SyscallOpt = FileWriteOperation; ReturnValue = long int] 
+forked process ---- 0........................... 
+await_resume
+FileWriteOperation::~FileWriteOperation() 
+~FileWriteOperation
+writepipe ({123456789012312345678901231234567890123><2345678901231234567890123}):
+BlockSyscall<SyscallOpt, ReturnValue>::BlockSyscall() [with SyscallOpt = FileReadOperation; ReturnValue = long int] 
+FileReadOperation::FileReadOperation(std::shared_ptr<AsyncFileDescriptor>, void*, std::size_t) 
+FileReadOperation created
+bool BlockSyscall<SyscallOpt, ReturnValue>::await_ready() const [with SyscallOpt = FileReadOperation; ReturnValue = long int] 
+bool BlockSyscall<SyscallOpt, ReturnValue>::await_suspend(std::__n4861::coroutine_handle<void>) [with SyscallOpt = FileReadOperation; ReturnValue = long int] 
+ssize_t FileReadOperation::syscall() 
+FileReadOperation reading(8{123456789012312345678901231234567890123><2345678901231234567890123}256
+**** error ****Resource temporarily unavailable
+Read -1 bytes
+...suspendiendo ... por un -1
+void FileReadOperation::suspend() 
+end accept
+cppcoro::task<T>::~task() [with T = bool]
+have you finished ? 0task disposable = 1
+no destruir la m_coro
+begin accept
+cppcoro::detail::task_promise_base::task_promise_base()#11
+cppcoro::detail::task_promise<T>::task_promise() [with T = std::unique_ptr<Socket>]
+auto cppcoro::detail::task_promise_base::initial_suspend()#11
+BlockSyscall<SyscallOpt, ReturnValue>::BlockSyscall() [with SyscallOpt = SocketAcceptOperation; ReturnValue = int] 
+SocketAcceptOperation::SocketAcceptOperation(Socket*) 
+socket_accept_operation
+SocketAcceptOperation::SocketAcceptOperation(Socket*) 
+bool BlockSyscall<SyscallOpt, ReturnValue>::await_ready() const [with SyscallOpt = SocketAcceptOperation; ReturnValue = int] 
+bool BlockSyscall<SyscallOpt, ReturnValue>::await_suspend(std::__n4861::coroutine_handle<void>) [with SyscallOpt = SocketAcceptOperation; ReturnValue = int] 
+int SocketAcceptOperation::syscall() 
+accept(4, ...)
+...suspendiendo ... por un -1
+void SocketAcceptOperation::suspend() 
+esperando en el epoll
+llamando en in
+ReturnValue BlockSyscall<SyscallOpt, ReturnValue>::await_resume() [with SyscallOpt = FileReadOperation; ReturnValue = long int] 
+await_resume
+ssize_t FileReadOperation::syscall() 
+FileReadOperation reading(8{123456789012312345678901231234567890123><2345678901231234567890123}256
+Read 68 bytes
+FileReadOperation::~FileReadOperation() 
+~FileReadOperation
+readpipe ({123456789012312345678901231234567890123><2345678901231234567890123}):
+------delete the AsyncFileDescriptor(8)
+------delete the AsyncFileDescriptor(7)
+wait returned                              : 0 but waiting for 327664
+kill returned 0 wait returned                              : 0 but waiting for 327664
+wait returned                              : 0 but waiting for 327664
+wait returned                              : 0 but waiting for 327664
+wait returned                              : 0 but waiting for 327664
+wait returned                              : 0 but waiting for 327664
+wait returned                              : 0 but waiting for 327664
+wait returned                              : 0 but waiting for 327664
+wait returned                              : 0 but waiting for 327664
+wait returned                              : 0 but waiting for 327664
+wait returned                              : 0 but waiting for 327664
+wait returned                              : 0 but waiting for 327664
+wait returned                              : 0 but waiting for 327664
+wait returned                              : 0 but waiting for 327664
+wait returned                              : 0 but waiting for 327664
+wait returned                              : 0 but waiting for 327664
+wait returned                              : 0 but waiting for 327664
+wait returned                              : 0 but waiting for 327664
+wait returned                              : 0 but waiting for 327664
+wait returned                              : 0 but waiting for 327664
+wait returned                              : 0 but waiting for 327664
+wait returned                              : 0 but waiting for 327664
+wait returned                              : 0 but waiting for 327664
+wait returned                              : 0 but waiting for 327664
+wait returned                              : 0 but waiting for 327664
+wait returned                              : 0 but waiting for 327664
+wait returned                              : 0 but waiting for 327664
+wait returned                              : 0 but waiting for 327664
+wait returned                              : 0 but waiting for 327664
+wait returned                              : 0 but waiting for 327664
+wait returned                              : 327664 but waiting for 327664
+SENDING ({123456789012312345678901231234567890123><2345678901231234567890123}):
+BlockSyscall<SyscallOpt, ReturnValue>::BlockSyscall() [with SyscallOpt = SocketSendOperation; ReturnValue = long int] 
+SocketSendOperation::SocketSendOperation(Socket*, void*, std::size_t) 
+socket_send_operation
+bool BlockSyscall<SyscallOpt, ReturnValue>::await_ready() const [with SyscallOpt = SocketSendOperation; ReturnValue = long int] 
+bool BlockSyscall<SyscallOpt, ReturnValue>::await_suspend(std::__n4861::coroutine_handle<void>) [with SyscallOpt = SocketSendOperation; ReturnValue = long int] 
+ssize_t SocketSendOperation::syscall() 
+send(5content{123456789012312345678901231234567890123><2345678901231234567890123}ammount68)
+ReturnValue BlockSyscall<SyscallOpt, ReturnValue>::await_resume() [with SyscallOpt = SocketSendOperation; ReturnValue = long int] 
+await_resume
+SocketSendOperation::~SocketSendOperation() 
+~socket_send_operation
+DONE (68):
+auto cppcoro::detail::task_promise_base::final_suspend()#10
+bool cppcoro::detail::task_promise_base::final_awaitable::await_ready() const
+void cppcoro::detail::task_promise_base::final_awaitable::await_suspend(std::__n4861::coroutine_handle<PROMISE>) [with PROMISE = cppcoro::detail::task_promise<bool>]
+decltype(auto) cppcoro::task<T>::operator co_await() const &&::awaitable::await_resume() [with T = bool]
+cppcoro::task<T>::~task() [with T = bool]
+have you finished ? 1task disposable = 0
+cppcoro::detail::task_promise<T>::~task_promise() [with T = bool]
+cppcoro::detail::task_promise_base::~task_promise_base()#10
+acabo de destruir la m_coro
+END
+------delete the socket(5)
+------delete the AsyncFileDescriptor(-1)
+auto cppcoro::detail::task_promise_base::final_suspend()#9
+bool cppcoro::detail::task_promise_base::final_awaitable::await_ready() const
+void cppcoro::detail::task_promise_base::final_awaitable::await_suspend(std::__n4861::coroutine_handle<PROMISE>) [with PROMISE = cppcoro::detail::task_promise<bool>]
+cppcoro::detail::task_promise<T>::~task_promise() [with T = bool]
+cppcoro::detail::task_promise_base::~task_promise_base()#9
+esperando en el epoll
+llamando en in
+ReturnValue BlockSyscall<SyscallOpt, ReturnValue>::await_resume() [with SyscallOpt = SocketAcceptOperation; ReturnValue = int] 
+await_resume
+int SocketAcceptOperation::syscall() 
+accept(4, ...)
+SocketAcceptOperation::~SocketAcceptOperation() 
+~socket_accept_operation
+SocketAcceptOperation::~SocketAcceptOperation() 
+aceptandoAsyncFileDescriptor 5Created
+ataching ...
+auto cppcoro::detail::task_promise_base::final_suspend()#11
+bool cppcoro::detail::task_promise_base::final_awaitable::await_ready() const
+void cppcoro::detail::task_promise_base::final_awaitable::await_suspend(std::__n4861::coroutine_handle<PROMISE>) [with PROMISE = cppcoro::detail::task_promise<std::unique_ptr<Socket> >]
+decltype(auto) cppcoro::task<T>::operator co_await() const &&::awaitable::await_resume() [with T = std::unique_ptr<Socket>]
+cppcoro::task<T>::~task() [with T = std::unique_ptr<Socket>]
+have you finished ? 1task disposable = 0
+cppcoro::detail::task_promise<T>::~task_promise() [with T = std::unique_ptr<Socket>]
+cppcoro::detail::task_promise_base::~task_promise_base()#11
+acabo de destruir la m_coro
+cppcoro::detail::task_promise_base::task_promise_base()#12
+cppcoro::detail::task_promise<T>::task_promise() [with T = bool]
+auto cppcoro::detail::task_promise_base::initial_suspend()#12
+void cppcoro::task<T>::resume() [with T = bool]#12
+BEGIN
+cppcoro::detail::task_promise_base::task_promise_base()#13
+cppcoro::detail::task_promise<T>::task_promise() [with T = bool]
+auto cppcoro::detail::task_promise_base::initial_suspend()#13
+BlockSyscall<SyscallOpt, ReturnValue>::BlockSyscall() [with SyscallOpt = SocketRecvOperation; ReturnValue = long int] 
+SocketRecvOperation::SocketRecvOperation(Socket*, void*, std::size_t) 
+socket_recv_operation
+bool BlockSyscall<SyscallOpt, ReturnValue>::await_ready() const [with SyscallOpt = SocketRecvOperation; ReturnValue = long int] 
+bool BlockSyscall<SyscallOpt, ReturnValue>::await_suspend(std::__n4861::coroutine_handle<void>) [with SyscallOpt = SocketRecvOperation; ReturnValue = long int] 
+recv(5contentammount255)
+recv 68
+ReturnValue BlockSyscall<SyscallOpt, ReturnValue>::await_resume() [with SyscallOpt = SocketRecvOperation; ReturnValue = long int] 
+await_resume
+SocketRecvOperation::~SocketRecvOperation() 
+~socket_recv_operation
+RECIVING ({123456789012312345678901231234567890123><2345678901231234567890123}):
+PipedAsyncCommand construction cat
+AsyncFileDescriptor 8Created
+ataching RO ...8
+successfully attached for reading # 8
+AsyncFileDescriptor 7Created
+ataching WO ...7
+2049 flags
+successfully attached for writing events# 7
+forked process ---- 327670........................... 
+PipedAsyncCommand creation finished 
+BlockSyscall<SyscallOpt, ReturnValue>::BlockSyscall() [with SyscallOpt = FileWriteOperation; ReturnValue = long int] 
+FileWriteOperation::FileWriteOperation(std::shared_ptr<AsyncFileDescriptor>, void*, std::size_t) 
+FileWriteOperation created
+bool BlockSyscall<SyscallOpt, ReturnValue>::await_ready() const [with SyscallOpt = FileWriteOperation; ReturnValue = long int] 
+bool BlockSyscall<SyscallOpt, ReturnValue>::await_suspend(std::__n4861::coroutine_handle<void>) [with SyscallOpt = FileWriteOperation; ReturnValue = long int] 
+ssize_t FileWriteOperation::syscall() 
+FileWriteOperation write(7,{123456789012312345678901231234567890123><2345678901231234567890123},68)
+bytes read68
+ReturnValue BlockSyscall<SyscallOpt, ReturnValue>::await_resume() [with SyscallOpt = FileWriteOperation; ReturnValue = long int] 
+await_resume
+FileWriteOperation::~FileWriteOperation() 
+~FileWriteOperation
+writepipe ({123456789012312345678901231234567890123><2345678901231234567890123}):
+BlockSyscall<SyscallOpt, ReturnValue>::BlockSyscall() [with SyscallOpt = FileReadOperation; ReturnValue = long int] 
+FileReadOperation::FileReadOperation(std::shared_ptr<AsyncFileDescriptor>, void*, std::size_t) 
+forked process ---- 0........................... 
+FileReadOperation created
+bool BlockSyscall<SyscallOpt, ReturnValue>::await_ready() const [with SyscallOpt = FileReadOperation; ReturnValue = long int] 
+bool BlockSyscall<SyscallOpt, ReturnValue>::await_suspend(std::__n4861::coroutine_handle<void>) [with SyscallOpt = FileReadOperation; ReturnValue = long int] 
+ssize_t FileReadOperation::syscall() 
+FileReadOperation reading(8{123456789012312345678901231234567890123><2345678901231234567890123}256
+**** error ****Resource temporarily unavailable
+Read -1 bytes
+...suspendiendo ... por un -1
+void FileReadOperation::suspend() 
+end accept
+cppcoro::task<T>::~task() [with T = bool]
+have you finished ? 0task disposable = 1
+no destruir la m_coro
+begin accept
+cppcoro::detail::task_promise_base::task_promise_base()#14
+cppcoro::detail::task_promise<T>::task_promise() [with T = std::unique_ptr<Socket>]
+auto cppcoro::detail::task_promise_base::initial_suspend()#14
+BlockSyscall<SyscallOpt, ReturnValue>::BlockSyscall() [with SyscallOpt = SocketAcceptOperation; ReturnValue = int] 
+SocketAcceptOperation::SocketAcceptOperation(Socket*) 
+socket_accept_operation
+SocketAcceptOperation::SocketAcceptOperation(Socket*) 
+bool BlockSyscall<SyscallOpt, ReturnValue>::await_ready() const [with SyscallOpt = SocketAcceptOperation; ReturnValue = int] 
+bool BlockSyscall<SyscallOpt, ReturnValue>::await_suspend(std::__n4861::coroutine_handle<void>) [with SyscallOpt = SocketAcceptOperation; ReturnValue = int] 
+int SocketAcceptOperation::syscall() 
+accept(4, ...)
+ReturnValue BlockSyscall<SyscallOpt, ReturnValue>::await_resume() [with SyscallOpt = SocketAcceptOperation; ReturnValue = int] 
+await_resume
+SocketAcceptOperation::~SocketAcceptOperation() 
+~socket_accept_operation
+SocketAcceptOperation::~SocketAcceptOperation() 
+aceptandoAsyncFileDescriptor 6Created
+ataching ...
+auto cppcoro::detail::task_promise_base::final_suspend()#14
+bool cppcoro::detail::task_promise_base::final_awaitable::await_ready() const
+void cppcoro::detail::task_promise_base::final_awaitable::await_suspend(std::__n4861::coroutine_handle<PROMISE>) [with PROMISE = cppcoro::detail::task_promise<std::unique_ptr<Socket> >]
+cppcoro::detail::task_promise<T>::~task_promise() [with T = std::unique_ptr<Socket>]
+------delete the socket(6)
+------delete the AsyncFileDescriptor(-1)
+cppcoro::detail::task_promise_base::~task_promise_base()#14
+decltype(auto) cppcoro::task<T>::operator co_await() const &&::awaitable::await_resume() [with T = std::unique_ptr<Socket>]
+cppcoro::task<T>::~task() [with T = std::unique_ptr<Socket>]
+have you finished ? 0task disposable = 0
